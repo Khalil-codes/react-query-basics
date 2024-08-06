@@ -9,7 +9,7 @@ export interface Post {
 
 export const getPosts = async (limit: number = 5) => {
   const { data } = await axios.get<Post[]>("/posts/", {
-    params: { _limit: limit },
+    params: { _limit: limit, _sort: "title" },
   });
 
   return data;
@@ -23,17 +23,25 @@ export const getPost = async (id: number) => {
 
 export const getPaginatedPosts = async (
   page: number = 1,
-  limit: number = 10
+  limit: number = 3
 ) => {
-  const { data } = await axios.get<Post[]>("/posts/", {
-    params: { _page: page, _per_page: limit },
+  const { data, headers } = await axios.get<Post[]>("/posts/", {
+    params: { _page: page, _limit: limit },
   });
 
-  return data;
+  const total = parseInt(headers["x-total-count"]);
+  const hasNext = page * limit <= total;
+
+  return {
+    totalPages: Math.ceil(total / limit),
+    nextPage: hasNext ? page + 1 : undefined,
+    prevPage: page > 1 ? page - 1 : undefined,
+    posts: data,
+  };
 };
 
 export const createPost = async (body: Pick<Post, "body" | "title">) => {
-  const { data } = await axios.post<Post>("/posts/", body);
+  const { data } = await axios.post<Post>("/posts/", { ...body, userId: 2 });
 
   return data;
 };

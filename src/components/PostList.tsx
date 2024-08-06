@@ -20,7 +20,7 @@ const PostList = ({ limit = 5 }: Props) => {
       <hr className="my-4" />
       <ol className="list-decimal mx-5">
         {data?.map((post) => (
-          <li>{post.title}</li>
+          <li key={post.id}>{post.title}</li>
         ))}
       </ol>
     </div>
