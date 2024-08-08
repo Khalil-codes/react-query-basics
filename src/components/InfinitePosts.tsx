@@ -1,6 +1,7 @@
 import { useInfiniteQuery } from "@tanstack/react-query";
 import { getPaginatedPosts, Post } from "../services/posts";
 import Button from "./Button";
+import PostCard from "./PostCard";
 
 interface Page {
   posts: Post[];
@@ -37,12 +38,7 @@ const InfinitePosts = () => {
         {data?.pages
           .flatMap((page) => page.posts)
           .map((post) => (
-            <div
-              className="border p-2 border-blue-400 rounded odd:border-red-500"
-              key={post.id}
-            >
-              {post.id} - {post.title}
-            </div>
+            <PostCard key={post.id} post={post} />
           ))}
         <Button
           onClick={() => {

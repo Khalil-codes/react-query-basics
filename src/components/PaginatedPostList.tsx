@@ -2,6 +2,7 @@ import { keepPreviousData, useQuery } from "@tanstack/react-query";
 import { useState } from "react";
 import { getPaginatedPosts } from "../services/posts";
 import Button from "./Button";
+import PostCard from "./PostCard";
 
 const PaginatedPostList = () => {
   const [page, setPage] = useState(1);
@@ -20,12 +21,7 @@ const PaginatedPostList = () => {
       <hr className="my-4" />
       <div className="flex flex-col gap-2 mb-4">
         {data?.posts?.map((post) => (
-          <div
-            className="border p-2 border-blue-400 rounded odd:border-red-500"
-            key={post.id}
-          >
-            {post.id} - {post.title}
-          </div>
+          <PostCard key={post.id} post={post} />
         ))}
       </div>
       <div className="flex justify-between">

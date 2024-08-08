@@ -1,5 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getPosts } from "../services/posts";
+import PostCard from "./PostCard";
 
 interface Props {
   limit?: number;
@@ -18,11 +19,11 @@ const PostList = ({ limit = 5 }: Props) => {
     <div>
       <h1 className="font-bold text-xl">Post List</h1>
       <hr className="my-4" />
-      <ol className="list-decimal mx-5">
+      <div className="flex flex-col gap-3">
         {data?.map((post) => (
-          <li key={post.id}>{post.title}</li>
+          <PostCard key={post.id} post={post} />
         ))}
-      </ol>
+      </div>
     </div>
   );
 };
