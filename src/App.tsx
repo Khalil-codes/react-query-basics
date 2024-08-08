@@ -4,6 +4,7 @@ import PostList from "./components/PostList";
 import PaginatedPostList from "./components/PaginatedPostList";
 import InfinitePosts from "./components/InfinitePosts";
 import CreatePost from "./components/CreatePost";
+import InfiniteScrolling from "./components/InfiniteScrolling";
 
 function App() {
   return (
@@ -19,6 +20,8 @@ function App() {
       <Base title="Paginated Queries" component={<PaginatedPostList />} />
       <Base title="Infinite Scrolling" component={<InfinitePosts />} />
       <Base title="Mutations" component={<CreatePost />} />
+
+      <Base title="Infinite Scrolling" component={<InfiniteScrolling />} />
     </main>
   );
 }
